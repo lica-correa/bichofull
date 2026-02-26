@@ -1,6 +1,7 @@
 # BichoFull
+Projeto da disciplina de Laboratório de Software.
 
-Sistema Full stack para simulação do Jogo do Bicho.
+Sistema full stack para simulação do Jogo do Bicho.
 
 ## Tecnologias
 - Spring Boot
