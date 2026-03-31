@@ -1,6 +1,8 @@
 package com.bichofull.backend.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuarios") 
@@ -15,6 +17,7 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
     private Double saldo;
