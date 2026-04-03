@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.home-container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, #0f2f0f, #1e4d1e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD PRINCIPAL */
+.home-card {
+  width: 90%;
+  max-width: 400px;
+  background: #1e4d1e;
+  border-radius: 25px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(204, 207, 7, 0.419);
+}
+
+/* CÍRCULO */
+.logo-circle {
+  width: 180px;
+  height: 180px;
+  background: #eee;
+  border-radius: 50%;
+  border: 5px solid yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo-circle h1 {
+  text-align: center;
+  color: #2e7d32;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* BOTÕES */
+.btn-entrar {
+  width: 100%;
+  background: yellow;
+  border: none;
+  color: #2e7d32;
+  padding: 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.btn-cadastro {
+  width: 100%;
+  background: rgb(163, 213, 147);
+  border: none;
+  color:#2e7d32;
+  padding: 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 🔥 RESPONSIVO DESKTOP */
+@media (min-width: 1024px) {
+  .home-card {
+    max-width: 500px;
+    padding: 60px 40px;
+  }
+
+  .logo-circle {
+    width: 220px;
+    height: 220px;
+  }
+
+  .logo-circle h1 {
+    font-size: 28px;
+  }
+}

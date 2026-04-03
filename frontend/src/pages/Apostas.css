@@ -1,0 +1,139 @@
+.apostas-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f2f0f, #1e4d1e);
+  padding: 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* TOPO */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.topo button {
+  margin-left: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  background: yellow;
+  color: #2e7d32;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* GRID */
+.grid-animais {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* CARD */
+.card-animal {
+  background: #2e7d32;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card-animal:hover {
+  transform: scale(1.05);
+}
+
+.card-animal h3 {
+  margin: 0;
+}
+
+.card-animal p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+/* SELECIONADO */
+.selecionado {
+  border: 3px solid yellow;
+  background: #1b5e20;
+}
+
+/* AREA APOSTA */
+.area-aposta {
+  display: flex;
+  gap: 10px;
+}
+
+.area-aposta input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+}
+
+.area-aposta button {
+  background: yellow;
+  border: none;
+  padding: 12px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #2e7d32;
+  cursor: pointer;
+}
+
+/* RESPONSIVO */
+@media (min-width: 1024px) {
+  .grid-animais {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* OVERLAY */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* MODAL */
+.modal {
+  background: #1e4d1e;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255,255,0,0.4);
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+}
+
+.modal pre {
+  white-space: pre-wrap;
+  font-family: Arial;
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background: yellow;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #2e7d32;
+  cursor: pointer;
+}
