@@ -55,4 +55,9 @@ public Usuario getUsuarioLogado(@RequestHeader("Authorization") String token) {
     String email = jwtUtil.extrairEmail(token.replace("Bearer ", ""));
     return service.buscarPorEmail(email);
 }
+
+@GetMapping("/email/{email}")
+public Usuario buscarPorEmail(@PathVariable String email) {
+    return service.buscarPorEmail(email);
+}
 }

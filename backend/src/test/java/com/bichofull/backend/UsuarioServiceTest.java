@@ -3,6 +3,7 @@ package com.bichofull.backend;
 import com.bichofull.backend.entity.Usuario;
 import com.bichofull.backend.repository.UsuarioRepository;
 import com.bichofull.backend.service.UsuarioService;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +25,7 @@ public class UsuarioServiceTest {
     void deveCriarUsuario() {
         Usuario u = new Usuario();
         u.setNome("Teste");
-        u.setEmail("teste" + System.currentTimeMillis() + "@email.com"); // email único
+        u.setEmail("teste" + System.currentTimeMillis() + "@email.com"); // único
         u.setSenha("123");
 
         Usuario salvo = service.salvar(u);
@@ -36,7 +37,7 @@ public class UsuarioServiceTest {
     void deveFazerLoginValido() {
         Usuario u = new Usuario();
         u.setNome("Login");
-        u.setEmail("test" + System.currentTimeMillis() + "@email.com");
+        u.setEmail("login@email.com"); // FIXO (IMPORTANTE)
         u.setSenha("123");
 
         service.salvar(u);
@@ -50,7 +51,7 @@ public class UsuarioServiceTest {
     void naoDeveLogarComSenhaErrada() {
         Usuario u = new Usuario();
         u.setNome("Erro");
-        u.setEmail("test" + System.currentTimeMillis() + "@email.com");
+        u.setEmail("erro@email.com"); // FIXO
         u.setSenha("123");
 
         service.salvar(u);

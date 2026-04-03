@@ -2,11 +2,9 @@ package com.bichofull.backend.service;
 
 import com.bichofull.backend.entity.Usuario;
 import com.bichofull.backend.repository.UsuarioRepository;
-import com.bichofull.backend.security.JwtUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -16,54 +14,63 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    public String login(String email, String senha){
-        Usuario usuario = repository.findByEmail(email).orElse(null);
-
-        if (usuario != null && usuario.getSenha() != null && usuario.getSenha().equals(senha)){
-            return jwtUtil.gerarToken(email);
-        }
-
-        throw new ResponseStatusException(
-            HttpStatus.UNAUTHORIZED,
-            "Email ou senha inválidos"
-        );
-    }
-
+    // SALVAR
     public Usuario salvar(Usuario usuario) {
-        if (usuario.getSaldo() == null) {
-            usuario.setSaldo(100.0);
+
+        if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+            throw new RuntimeException("Email obrigatório");
         }
+
+        if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
+            throw new RuntimeException("Senha obrigatória");
+        }
+
         return repository.save(usuario);
     }
 
+    // LISTAR
     public List<Usuario> listar() {
         return repository.findAll();
     }
 
+    // BUSCAR POR ID
     public Usuario buscarPorId(Long id) {
-    return repository.findById(id).orElse(null);
-}
-
-public Usuario atualizar(Long id, Usuario usuario) {
-    Usuario existente = repository.findById(id).orElse(null);
-    if (existente != null) {
-        existente.setNome(usuario.getNome());
-        existente.setEmail(usuario.getEmail());
-        existente.setSenha(usuario.getSenha());
-        existente.setSaldo(usuario.getSaldo());
-        return repository.save(existente);
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
-    return null;
-}
 
-public void deletar(Long id) {
-    repository.deleteById(id);
-}
+    // BUSCAR POR EMAIL
+    public Usuario buscarPorEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
 
-public Usuario buscarPorEmail(String email) {
-    return repository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-}
+    // ATUALIZAR
+    public Usuario atualizar(Long id, Usuario usuarioAtualizado) {
+        Usuario usuario = buscarPorId(id);
+
+        usuario.setNome(usuarioAtualizado.getNome());
+        usuario.setEmail(usuarioAtualizado.getEmail());
+        usuario.setSenha(usuarioAtualizado.getSenha());
+
+        return repository.save(usuario);
+    }
+
+    // DELETAR
+    public void deletar(Long id) {
+        Usuario usuario = buscarPorId(id);
+        repository.delete(usuario);
+    }
+
+    // LOGIN SIMPLES
+    public String login(String email, String senha) {
+
+        Usuario usuario = buscarPorEmail(email);
+
+        if (!usuario.getSenha().equals(senha)) {
+            throw new RuntimeException("Senha inválida");
+        }
+
+        return "login-sucesso";
+    }
 }

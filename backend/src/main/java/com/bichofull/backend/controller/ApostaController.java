@@ -1,7 +1,9 @@
 package com.bichofull.backend.controller;
 
 import com.bichofull.backend.entity.Aposta;
+
 import com.bichofull.backend.service.ApostaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,11 @@ public class ApostaController {
     @PostMapping
     public Aposta criar(@RequestBody Aposta aposta) {
         return service.salvar(aposta);
+    }
+
+    @GetMapping("/resultado/{id}")
+    public String resultado(@PathVariable Long id) {
+        return service.processarResultado(id);
     }
 
     @GetMapping

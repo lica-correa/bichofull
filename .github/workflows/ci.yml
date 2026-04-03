@@ -1,22 +1,30 @@
-name: CI BichoFull
+name: CI Bichofull
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar código
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Instalar Java
+      - name: Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
 
-      - name: Rodar testes
-        run: cd backend && ./mvnw test
+      - name: Build backend
+        run: |
+          cd backend
+          mvn clean install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
